@@ -1,9 +1,8 @@
 package com.example.test.student;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -16,17 +15,23 @@ public class StudentController {
 
     @Autowired
     public StudentController(StudentService service){
+
         this.studentService=service;
     }
 
-    @GetMapping("/student")
-    public List<StudentClass> getStudent(){
-        return studentService.getStudent();
-    }
+    //@GetMapping("/student")
+    //public List<StudentClass> getStudent(){
+        //return studentService.getStudent();
+    //}
 
     @GetMapping("/home")
     public String getHome(){
         return "Hey Welcome to Home";
+    }
+
+    @PostMapping("/NewStudent")
+    public void registerNewStudent(@RequestBody StudentClass studentClass){
+        studentService.addNewStudent(studentClass);
     }
 
 }

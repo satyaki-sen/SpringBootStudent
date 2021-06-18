@@ -1,5 +1,11 @@
 package com.example.test.student;
 
+import com.example.test.JdbcConfig;
+import org.apache.commons.logging.Log;
+import org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebApplicationContext;
+import org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebServerApplicationContext;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -10,40 +16,24 @@ import java.util.List;
 @Service
 public class StudentService {
 
-    public List<StudentClass> addStudents(){
+    private ApplicationContext context;
+    private StudentDao studentDao;
 
-        List<StudentClass> studentServiceList=new ArrayList<>();
-        studentServiceList.add(new StudentClass(1L,
-                "Name",
-                "satyakisen1947@gmail.com",
-                LocalDate.of(2001,10,12),
-                20));
-        studentServiceList.add(new StudentClass(1L,
-                "Name2",
-                "satyakisen1947@gmail.com",
-                LocalDate.of(2001,10,12),
-                20));
-        studentServiceList.add(new StudentClass(1L,
-                "Name3",
-                "satyakisen1947@gmail.com",
-                LocalDate.of(2001,10,12),
-                20));
-        studentServiceList.add(new StudentClass(1L,
-                "Name4",
-                "satyakisen1947@gmail.com",
-                LocalDate.of(2001,10,12),
-                20));
-        studentServiceList.add(new StudentClass(1L,
-                "Satyaki",
-                "satyakisen1947@gmail.com",
-                LocalDate.of(2001,10,12),
-                20));
+    public StudentService() {
 
-        return studentServiceList;
+        context=new AnnotationConfigApplicationContext(JdbcConfig.class);
+        studentDao=context.getBean("studentDao",StudentDao.class);
+
     }
 
-    public List<StudentClass> getStudent(){
-        return addStudents();
+    //public List<StudentClass> getStudent(){
+        //return addStudents();
+    //}
+
+    public void addNewStudent(StudentClass studentClass){
+
+        studentDao.insert(studentClass);
+        System.out.println(studentClass);
     }
 
 }
