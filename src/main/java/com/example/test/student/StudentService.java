@@ -2,6 +2,7 @@ package com.example.test.student;
 
 import com.example.test.JdbcConfig;
 import org.apache.commons.logging.Log;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebApplicationContext;
 import org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebServerApplicationContext;
 import org.springframework.context.ApplicationContext;
@@ -16,19 +17,26 @@ import java.util.List;
 @Service
 public class StudentService {
 
-    private ApplicationContext context;
+    //private ApplicationContext context;
+    @Autowired
     private StudentDao studentDao;
 
     public StudentService() {
 
-        context=new AnnotationConfigApplicationContext(JdbcConfig.class);
-        studentDao=context.getBean("studentDao",StudentDao.class);
+       // context=new AnnotationConfigApplicationContext(JdbcConfig.class);
+       // studentDao=context.getBean("studentDao",StudentDao.class);
 
     }
 
     //public List<StudentClass> getStudent(){
         //return addStudents();
     //}
+
+    public List<StudentClass> getStudentSelect(Long id){
+
+        return studentDao.selectStudent(id);
+    }
+
 
     public void addNewStudent(StudentClass studentClass){
 
