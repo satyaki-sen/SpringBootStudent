@@ -18,10 +18,6 @@ public class StudentController {
         this.studentService=service;
     }
 
-    //@GetMapping("/student")
-    //public List<StudentClass> getStudent(){
-        //return studentService.getStudent();
-    //}
 
     @GetMapping("/home")
     public String getHome(){
@@ -34,9 +30,15 @@ public class StudentController {
     }
 
     @GetMapping("/student/{id}")
-    public List<StudentClass> getStudentSearch(@PathVariable(value = "id") Long userId){
+    public StudentClass getStudentSearch(@PathVariable(value = "id") Long userId){
 
         return studentService.getStudentSelect(userId);
+    }
+
+    @GetMapping("/AllStudents")
+    public List<StudentClass> getAllStudents(){
+
+        return studentService.getAllStudents();
     }
 
 }

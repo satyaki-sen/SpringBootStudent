@@ -10,6 +10,8 @@ public interface StudentDao {
 
     public int insert(StudentClass student);
 
-    public List<StudentClass> selectStudent(Long id);
+    public StudentClass selectStudent(Long id);
+
+    public List<StudentClass> selectAllStudents();
 
 }

@@ -11,7 +11,7 @@ public class StudentDaoClass implements StudentDao{
 
     @Autowired
     private JdbcTemplate jdbctemplate;
-    private List<StudentClass> selectRes;
+    private List<StudentClass> selectAll;
 
     @Override
     public int insert(StudentClass student) {
@@ -24,16 +24,21 @@ public class StudentDaoClass implements StudentDao{
     }
 
     @Override
-    public List<StudentClass> selectStudent(Long id) {
-
-        selectRes=new ArrayList<>();
+    public StudentClass selectStudent(Long id) {
 
         String query="SELECT * FROM Student WHERE std_id=?";
         RowMapper<StudentClass> rowMapper=new RowMapperClass();
         StudentClass studentClass=this.jdbctemplate.queryForObject(query,rowMapper,id);
-        selectRes.add(studentClass);
 
-        return selectRes;
+        return studentClass;
+    }
+
+    @Override
+    public List<StudentClass> selectAllStudents() {
+
+        String query="SELECT * FROM Student";
+        selectAll=this.jdbctemplate.query(query,new RowMapperClass());
+        return selectAll;
     }
 
     public JdbcTemplate getJdbctemplate() {

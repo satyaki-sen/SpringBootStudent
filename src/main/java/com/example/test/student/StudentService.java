@@ -23,16 +23,14 @@ public class StudentService {
 
     public StudentService() {
 
-       // context=new AnnotationConfigApplicationContext(JdbcConfig.class);
-       // studentDao=context.getBean("studentDao",StudentDao.class);
-
     }
 
-    //public List<StudentClass> getStudent(){
-        //return addStudents();
-    //}
+    public List<StudentClass> getAllStudents(){
 
-    public List<StudentClass> getStudentSelect(Long id){
+        return studentDao.selectAllStudents();
+    }
+
+    public StudentClass getStudentSelect(Long id){
 
         return studentDao.selectStudent(id);
     }
