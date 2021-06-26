@@ -1,9 +1,11 @@
 package com.example.test.student;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,10 +18,10 @@ public class StudentDaoClass implements StudentDao{
     @Override
     public int insert(StudentClass student) {
 
-        String query="INSERT INTO Student(std_id,std_name,std_email,std_dob,std_age)" +
-                "VALUES(?,?,?,?,?)";
-        int res=this.jdbctemplate.update(query,student.getId(),student.getName(),student.getEmail(),
-                student.getDob(),student.getAge());
+       String query="INSERT INTO Student(std_name,std_email,std_dob,std_age)" +
+               "VALUES(?,?,?,?)";
+       int res=this.jdbctemplate.update(query,student.getName(),student.getEmail(),
+                                        student.getDob(),student.getAge());
         return res;
     }
 
@@ -42,10 +44,12 @@ public class StudentDaoClass implements StudentDao{
     }
 
     public JdbcTemplate getJdbctemplate() {
+
         return jdbctemplate;
     }
 
     public void setJdbctemplate(JdbcTemplate jdbctemplate) {
+
         this.jdbctemplate = jdbctemplate;
     }
 }

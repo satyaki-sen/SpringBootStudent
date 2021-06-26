@@ -1,5 +1,11 @@
 package com.example.test.student;
 
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+
+import javax.annotation.Generated;
 import java.time.LocalDate;
 
 public class StudentClass {
@@ -13,12 +19,11 @@ public class StudentClass {
     public StudentClass() {
     }
 
-    public StudentClass(Long id,String name, String email,LocalDate dob ,Integer age) {
-        this.id=id;
+    public StudentClass(String name, String email,LocalDate dob,Integer age) {
         this.name = name;
+        this.email = email;
         this.dob = dob;
         this.age = age;
-        this.email = email;
     }
 
     public Long getId() {

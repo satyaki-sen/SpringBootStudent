@@ -17,7 +17,6 @@ import java.util.List;
 @Service
 public class StudentService {
 
-    //private ApplicationContext context;
     @Autowired
     private StudentDao studentDao;
 
@@ -35,9 +34,7 @@ public class StudentService {
         return studentDao.selectStudent(id);
     }
 
-
     public void addNewStudent(StudentClass studentClass){
-
         studentDao.insert(studentClass);
         System.out.println(studentClass);
     }
